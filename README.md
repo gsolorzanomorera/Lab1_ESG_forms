@@ -7,12 +7,12 @@ Mirrors the structure of your Excel dashboard — with live calculations, caseab
 
 | Page | Purpose |
 |------|---------|
-| 🏠 Assumptions | Company info, GWP factors, reduction targets |
-| 🔥 Scope 1 | Stationary combustion, fleet, fugitive emissions |
-| ⚡ Scope 2 | Purchased electricity (location- & market-based) |
-| 🔗 Scope 3 | Value chain (Cat 1, 3, 6, 7, 11) |
-| 📊 Dashboard | Executive KPIs, intensity ratios, target progress |
-| 📄 Report | Download .txt / .csv report + save/restore JSON |
+| Assumptions | Company info, GWP factors, reduction targets |
+| Scope 1 | Stationary combustion, fleet, fugitive emissions |
+| Scope 2 | Purchased electricity (location- & market-based) |
+| Scope 3 | Value chain (Cat 1, 3, 6, 7, 11) |
+| Dashboard | Executive KPIs, intensity ratios, target progress |
+| Report | Download .txt / .csv report + save/restore JSON |
 
 ## Run locally
 
