@@ -1,7 +1,7 @@
 # GHG Carbon Footprint Calculator
 
 A web-based GHG inventory tool built on the **GHG Protocol Corporate Standard**.
-Mirrors the structure of your Excel dashboard — with live calculations, caseable factors, and instant report export.
+Mirrors the structure of lab 1 Excel dashboard — with live calculations, caseable factors, and instant report export.
 
 ## Structure
 
@@ -14,19 +14,6 @@ Mirrors the structure of your Excel dashboard — with live calculations, caseab
 | Dashboard | Executive KPIs, intensity ratios, target progress |
 | Report | Download .txt / .csv report + save/restore JSON |
 
-## Run locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-## Deploy to Streamlit Cloud
-
-1. Push this folder to a GitHub repo
-2. Go to share.streamlit.io → New app → select your repo
-3. Set `app.py` as the main file
-4. Done ✅
 
 ## Key features
 
