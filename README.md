@@ -1,4 +1,4 @@
-# 🌍 GHG Carbon Footprint Calculator
+# GHG Carbon Footprint Calculator
 
 A web-based GHG inventory tool built on the **GHG Protocol Corporate Standard**.
 Mirrors the structure of your Excel dashboard — with live calculations, caseable factors, and instant report export.
