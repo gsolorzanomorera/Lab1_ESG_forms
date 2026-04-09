@@ -1,5 +1,5 @@
 # ══════════════════════════════════════════════════════════════════════════════
-#  GHG CARBON INVENTORY — McKinsey Style
+#  GHG CARBON INVENTORY — gsolmo Style
 #  Streamlit web application
 #  Based on: GHG Protocol Corporate Standard
 # ══════════════════════════════════════════════════════════════════════════════
@@ -34,7 +34,7 @@ st.set_page_config(
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  McKINSEY-STYLE CSS
+#  gsolmo-STYLE CSS
 #  Streamlit lets us inject raw HTML/CSS using st.markdown() with
 #  unsafe_allow_html=True. Everything inside <style>...</style> is pure CSS
 #  that overrides Streamlit's default look and feel.
@@ -54,7 +54,7 @@ st.markdown("""
 /* ── CSS CUSTOM PROPERTIES (design tokens) ───────────────────────────────────
    :root defines variables available everywhere in the stylesheet.
    Using variables means changing one value here updates every place it's used.
-   This is the McKinsey palette: white backgrounds, deep navy, one blue accent. */
+   This is the gsolmo palette: white backgrounds, deep navy, one blue accent. */
 :root {
     --white:     #FFFFFF;   /* pure page background                          */
     --off-white: #F7F7F5;   /* very slightly warm white — used in inputs     */
@@ -62,8 +62,8 @@ st.markdown("""
     --light-grey:#F0EEE9;   /* slightly darker warm grey — table total rows  */
     --mid-grey:  #9A9591;   /* medium grey — labels and captions             */
     --body:      #1A1A1A;   /* near-black — main body text                   */
-    --navy:      #002B5B;   /* McKinsey deep navy — headings, borders, sidebar*/
-    --accent:    #005EB8;   /* McKinsey blue — links, chips, progress bars   */
+    --navy:      #002B5B;   /* gsolmo deep navy — headings, borders, sidebar*/
+    --accent:    #005EB8;   /* gsolmo blue — links, chips, progress bars   */
     --accent-lt: #E8F0FA;   /* very light blue — insight box background      */
     --teal:      #00857C;   /* teal green — used for positive/down deltas    */
     --amber:     #C9600A;   /* amber orange — used for negative/up deltas    */
@@ -84,7 +84,7 @@ html, body,
 }
 
 /* ── SIDEBAR ─────────────────────────────────────────────────────────────────
-   The sidebar uses McKinsey's navy as its background — a strong contrast
+   The sidebar uses gsolmo's navy as its background — a strong contrast
    with the white main area. The selector targets Streamlit's sidebar element
    by its internal data-testid attribute. */
 [data-testid="stSidebar"] {
@@ -114,10 +114,10 @@ html, body,
 }
 
 /* ── HEADINGS ────────────────────────────────────────────────────────────────
-   h1 is used for page titles. The signature McKinsey treatment:
+   h1 is used for page titles. The signature gsolmo treatment:
    - Playfair Display serif for authority and elegance
    - Deep navy colour
-   - A 2px navy bottom border (like a McKinsey exhibit title line)
+   - A 2px navy bottom border (like a gsolmo exhibit title line)
    - Slight negative letter-spacing makes large type look more refined */
 h1 {
     font-family: 'Playfair Display', serif;
@@ -145,7 +145,7 @@ h2 {
 
 /* ── EYEBROW LABEL ───────────────────────────────────────────────────────────
    An "eyebrow" is a small uppercase label that sits above a large heading.
-   Common in McKinsey presentations: e.g. "STEP 01" above the page title.
+   Common in gsolmo presentations: e.g. "STEP 01" above the page title.
    display:block ensures it occupies its own line even though it's a <span>. */
 .eyebrow {
     font-family: 'Source Sans 3', sans-serif;
@@ -153,7 +153,7 @@ h2 {
     font-weight: 600;
     text-transform: uppercase;     /* force all-caps regardless of input text */
     letter-spacing: 0.15em;        /* wide tracking is standard for eyebrows  */
-    color: var(--accent);          /* McKinsey blue                            */
+    color: var(--accent);          /* gsolmo blue                            */
     margin-bottom: 4px;
     display: block;
 }
@@ -168,15 +168,15 @@ h2 {
 
 /* ── KPI CARD ────────────────────────────────────────────────────────────────
    KPI cards show a single metric with label, large number, and unit.
-   McKinsey style: NO box, NO shadow, NO background — just a thick top border.
+   gsolmo style: NO box, NO shadow, NO background — just a thick top border.
    The 3px solid navy top-border is the only visual frame. */
-.mck-kpi {
+.gsm-kpi {
     border-top: 3px solid var(--navy);
     padding: 16px 0 12px 0;
 }
 
 /* Small uppercase label above the number (e.g. "SCOPE 1 — DIRECT") */
-.mck-kpi-label {
+.gsm-kpi-label {
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
@@ -186,7 +186,7 @@ h2 {
 }
 
 /* The large number itself — Playfair Display makes it feel weighty and precise */
-.mck-kpi-value {
+.gsm-kpi-value {
     font-family: 'Playfair Display', serif;
     font-size: 2.3rem;
     font-weight: 700;
@@ -196,10 +196,10 @@ h2 {
 }
 
 /* Small unit label below the number (e.g. "tCO₂e") */
-.mck-kpi-unit { font-size: 12px; color: var(--mid-grey); }
+.gsm-kpi-unit { font-size: 12px; color: var(--mid-grey); }
 
 /* Year-on-year delta line below the unit (e.g. "↓ 8.2% vs prior year") */
-.mck-kpi-delta { font-size: 12px; font-weight: 600; margin-top: 4px; }
+.gsm-kpi-delta { font-size: 12px; font-weight: 600; margin-top: 4px; }
 
 /* A decrease (↓) in emissions is GOOD — coloured teal */
 .delta-neg { color: var(--teal); }
@@ -209,7 +209,7 @@ h2 {
 
 /* ── INSIGHT BOX ─────────────────────────────────────────────────────────────
    A highlighted callout box used to summarise a key finding.
-   The left blue border is the McKinsey "sidebar quote" styling.
+   The left blue border is the gsolmo "sidebar quote" styling.
    Light blue background ensures it's readable without being distracting. */
 .insight-box {
     background: var(--accent-lt);       /* very light blue background         */
@@ -223,48 +223,48 @@ h2 {
 .insight-box strong { color: var(--navy); }
 
 /* ── DATA TABLE ──────────────────────────────────────────────────────────────
-   McKinsey exhibit tables use:
+   gsolmo exhibit tables use:
    - Double top border (2px navy) to frame the header
    - Single bottom borders on each row
    - Double bottom border (2px navy) on the last row to close the table
    - No vertical lines (border-collapse:collapse removes them)
    - Uppercase column headers at 11px                                        */
-.mck-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+.gsm-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
 
 /* Header row: thick navy above, thinner navy below */
-.mck-table thead tr { border-top:2px solid var(--navy); border-bottom:1px solid var(--navy); }
+.gsm-table thead tr { border-top:2px solid var(--navy); border-bottom:1px solid var(--navy); }
 
 /* Column header cells: small, uppercase, navy, wide tracking */
-.mck-table thead th {
+.gsm-table thead th {
     padding:8px 12px; text-align:left;
     font-size:11px; font-weight:600; text-transform:uppercase;
     letter-spacing:0.08em; color:var(--navy);
 }
 
 /* Numeric columns align right — financial table convention */
-.mck-table thead th.num { text-align:right; }
+.gsm-table thead th.num { text-align:right; }
 
 /* Each data row has a light grey bottom rule between it and the next row */
-.mck-table tbody tr { border-bottom:1px solid var(--rule); }
+.gsm-table tbody tr { border-bottom:1px solid var(--rule); }
 
 /* Last row has a closing 2px navy rule — mirrors the top header rule */
-.mck-table tbody tr:last-child { border-bottom:2px solid var(--navy); }
+.gsm-table tbody tr:last-child { border-bottom:2px solid var(--navy); }
 
 /* Standard cell padding */
-.mck-table tbody td { padding:8px 12px; }
+.gsm-table tbody td { padding:8px 12px; }
 
 /* Numeric data cells: right-aligned and monospace so digits stack vertically */
-.mck-table tbody td.num {
+.gsm-table tbody td.num {
     text-align:right;
     font-family:'Source Code Pro', monospace;
     font-size:12px;
 }
 
 /* The "Total" row gets a light grey background to distinguish it */
-.mck-table tr.total-row { background:var(--light-grey); }
+.gsm-table tr.total-row { background:var(--light-grey); }
 
 /* Total row text uses navy and bold weight */
-.mck-table tr.total-row td { color:var(--navy); font-weight:600; }
+.gsm-table tr.total-row td { color:var(--navy); font-weight:600; }
 
 /* ── EMISSION FACTOR CHIP ────────────────────────────────────────────────────
    A small pill-shaped badge that shows an emission factor next to an input.
@@ -284,22 +284,22 @@ h2 {
 /* ── PROGRESS BAR ────────────────────────────────────────────────────────────
    We build our own progress bar in HTML because Streamlit's default one
    has styles we can't easily override. Three parts:
-   - mck-progress-label: the text row with left label and right percentage
-   - mck-progress-track: the grey background rail
-   - mck-progress-fill:  the blue filled portion (width set inline per value) */
-.mck-progress-label {
+   - gsm-progress-label: the text row with left label and right percentage
+   - gsm-progress-track: the grey background rail
+   - gsm-progress-fill:  the blue filled portion (width set inline per value) */
+.gsm-progress-label {
     display:flex;                  /* puts label and percentage on one line     */
     justify-content:space-between; /* label left, percentage right             */
     font-size:12px;
     color:var(--mid-grey);
     margin-bottom:4px;
 }
-.mck-progress-track { background:var(--light-grey); height:6px; width:100%; }
-.mck-progress-fill  { background:var(--accent); height:6px; }
+.gsm-progress-track { background:var(--light-grey); height:6px; width:100%; }
+.gsm-progress-fill  { background:var(--accent); height:6px; }
 
 /* ── INPUT FIELDS ────────────────────────────────────────────────────────────
    Override Streamlit's default input styling so number inputs and text inputs
-   match our McKinsey palette: off-white background, warm grey border, navy
+   match our gsolmo palette: off-white background, warm grey border, navy
    text, and a subtle square border-radius (2px instead of Streamlit's 8px). */
 [data-testid="stNumberInput"] input,
 [data-testid="stTextInput"] input {
@@ -331,7 +331,7 @@ label { font-size:13px !important; color:#444 !important; font-weight:500 !impor
 
 /* ── BUTTONS ─────────────────────────────────────────────────────────────────
    Primary action buttons: solid navy background, white text, square corners,
-   uppercase text with wide tracking — classic McKinsey CTA style.
+   uppercase text with wide tracking — classic gsolmo CTA style.
    On hover they switch to the lighter blue accent. */
 .stButton > button {
     background: var(--navy) !important;
@@ -755,7 +755,7 @@ def dpct(c, p):
 # ── UI HELPER: KPI CARD ───────────────────────────────────────────────────────
 def kpi_html(label, value, unit, delta=None):
     """
-    Build the HTML string for a McKinsey-style KPI card.
+    Build the HTML string for a gsolmo-style KPI card.
 
     Args:
         label  — small uppercase text above the number (e.g. "SCOPE 1 — DIRECT")
@@ -775,21 +775,21 @@ def kpi_html(label, value, unit, delta=None):
         arr = "↓" if delta < 0 else "↑"
         # Build the delta div. abs(delta) shows the magnitude without a sign
         # because the arrow already communicates direction.
-        d = f'<div class="mck-kpi-delta {cls}">{arr} {abs(delta):.1f}% vs prior year</div>'
+        d = f'<div class="gsm-kpi-delta {cls}">{arr} {abs(delta):.1f}% vs prior year</div>'
 
     # Return the full KPI card HTML block.
     # CSS classes are defined in the <style> block at the top of the file.
-    return f"""<div class="mck-kpi">
-      <div class="mck-kpi-label">{label}</div>
-      <div class="mck-kpi-value">{value}</div>
-      <div class="mck-kpi-unit">{unit}</div>{d}
+    return f"""<div class="gsm-kpi">
+      <div class="gsm-kpi-label">{label}</div>
+      <div class="gsm-kpi-value">{value}</div>
+      <div class="gsm-kpi-unit">{unit}</div>{d}
     </div>"""
 
 
 # ── UI HELPER: PAGE HEADER ────────────────────────────────────────────────────
 def section_head(eyebrow, title, caption=""):
     """
-    Render the standard McKinsey page header: eyebrow → h1 title → caption.
+    Render the standard gsolmo page header: eyebrow → h1 title → caption.
 
     Args:
         eyebrow — small all-caps label above the title (e.g. "STEP 01")
@@ -906,7 +906,7 @@ with st.sidebar:
 # ══════════════════════════════════════════════════════════════════════════════
 if page == "Assumptions":
 
-    # Render the McKinsey-style page header (eyebrow + h1 + caption)
+    # Render the gsolmo-style page header (eyebrow + h1 + caption)
     section_head(
         "Step 01",
         "Central Assumptions",
@@ -1213,8 +1213,8 @@ elif page == "Scope 1 — Direct":
     st.markdown("## Scope 1 Summary")
 
     # We build the HTML table as a string rather than using st.dataframe()
-    # because st.dataframe() can't be styled with McKinsey's exact table rules.
-    # The mck-table CSS class (defined above) handles all the visual formatting.
+    # because st.dataframe() can't be styled with gsolmo's exact table rules.
+    # The gsm-table CSS class (defined above) handles all the visual formatting.
     rows = [
         ("Natural Gas",       "Stationary", ff(sum(results["natgas"]))),
         ("Diesel / Fuel Oil", "Stationary", ff(sum(results["diesel"]))),
@@ -1227,7 +1227,7 @@ elif page == "Scope 1 — Direct":
     ]
 
     # Build the table HTML string by concatenating each row
-    tbl = ('<table class="mck-table">'
+    tbl = ('<table class="gsm-table">'
            '<thead><tr><th>Source</th><th>Category</th><th class="num">tCO₂e</th></tr></thead>'
            '<tbody>')
     for name, cat, val in rows:
@@ -1324,7 +1324,7 @@ elif page == "Scope 2 — Purchased Energy":
     st.divider()
 
     # Summary table comparing the two methods
-    tbl = ('<table class="mck-table"><thead><tr>'
+    tbl = ('<table class="gsm-table"><thead><tr>'
            '<th>Method</th><th>Basis</th><th class="num">tCO₂e</th>'
            '</tr></thead><tbody>')
     tbl += f"<tr><td>Location-Based</td><td>Grid average × total MWh</td><td class='num'>{ff(s2['lb'])}</td></tr>"
@@ -1436,7 +1436,7 @@ elif page == "Scope 3 — Value Chain":
         ("cat11", "Cat 11 — Use of Sold Products",       "Activity-based"),
     ]
 
-    tbl = ('<table class="mck-table"><thead><tr>'
+    tbl = ('<table class="gsm-table"><thead><tr>'
            '<th>Category</th><th>Method</th>'
            '<th class="num">tCO₂e</th><th class="num">% of S3</th>'
            '</tr></thead><tbody>')
@@ -1503,7 +1503,7 @@ elif page == "Dashboard":
             ("Total",        "S1 + S2(MB) + S3",                       grand,      prior_grand),
         ]
 
-        tbl = ('<table class="mck-table"><thead><tr>'
+        tbl = ('<table class="gsm-table"><thead><tr>'
                '<th>Scope</th><th>Description</th>'
                '<th class="num">tCO₂e</th><th class="num">% Share</th><th class="num">YoY</th>'
                '</tr></thead><tbody>')
@@ -1515,7 +1515,7 @@ elif page == "Dashboard":
             # Year-on-year change: formatted as +/- percentage, or "—" if no prior data
             yoy = f"{dpct(val, prior):+.1f}%" if prior > 0 else "—"
 
-            # The Total row gets the mck-table total-row CSS class (grey bg + bold)
+            # The Total row gets the gsm-table total-row CSS class (grey bg + bold)
             cls = ' class="total-row"' if sc == "Total" else ""
 
             # Bold tags applied to the Total row only
@@ -1546,7 +1546,7 @@ elif page == "Dashboard":
         bench = s["benchmark_revenue_intensity"]  # industry benchmark (optional)
 
         # Build the intensity table; rows added conditionally only if data exists
-        tbl2 = ('<table class="mck-table"><thead><tr>'
+        tbl2 = ('<table class="gsm-table"><thead><tr>'
                 '<th>Metric</th><th class="num">Value</th><th class="num">Unit</th><th class="num">YoY</th>'
                 '</tr></thead><tbody>')
 
@@ -1588,15 +1588,15 @@ elif page == "Dashboard":
         rp = s2["recs_pct"]  # percentage of electricity covered by RECs/PPAs
 
         # HTML progress bar — Streamlit's built-in progress bar can't be styled
-        # with our McKinsey CSS, so we build our own using divs.
+        # with our gsolmo CSS, so we build our own using divs.
         # min(rp, 100) prevents the fill from exceeding 100% width.
         st.markdown(
             f"""<div style="margin:12px 0;">
-              <div class="mck-progress-label">
+              <div class="gsm-progress-label">
                 <span>Renewable Coverage</span><span>{rp:.1f}%</span>
               </div>
-              <div class="mck-progress-track">
-                <div class="mck-progress-fill" style="width:{min(rp, 100):.1f}%"></div>
+              <div class="gsm-progress-track">
+                <div class="gsm-progress-fill" style="width:{min(rp, 100):.1f}%"></div>
               </div>
             </div>""",
             unsafe_allow_html=True,
@@ -1630,12 +1630,12 @@ elif page == "Dashboard":
         # Progress bar showing % of the way to the target
         st.markdown(
             f"""<div style="margin-top:16px;">
-              <div class="mck-progress-label">
+              <div class="gsm-progress-label">
                 <span>Progress toward {s['target_reduction_pct']}% reduction by {s['target_year']}</span>
                 <span>{progress * 100:.0f}%</span>
               </div>
-              <div class="mck-progress-track">
-                <div class="mck-progress-fill" style="width:{min(progress * 100, 100):.1f}%"></div>
+              <div class="gsm-progress-track">
+                <div class="gsm-progress-fill" style="width:{min(progress * 100, 100):.1f}%"></div>
               </div>
             </div>""",
             unsafe_allow_html=True,
